@@ -1,10 +1,11 @@
 <?php
-
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AlbumRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
 #[ApiResource]
@@ -23,7 +24,15 @@ class Album
 
     #[ORM\ManyToOne(targetEntity: Artist::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $artist;
+    private ?Artist $artist = null;
+
+    #[ORM\OneToMany(mappedBy: 'album', targetEntity: Song::class, orphanRemoval: true)]
+    private Collection $songs;
+
+    public function __construct()
+    {
+        $this->songs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,5 +70,10 @@ class Album
     {
         $this->artist = $artist;
         return $this;
+    }
+
+    public function getSongs(): Collection
+    {
+        return $this->songs;
     }
 }

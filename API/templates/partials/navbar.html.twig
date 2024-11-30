@@ -1,23 +1,25 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" />
-<div class="p-4 w-full">
-  <!-- dark mode - text and icons -->
-  <div class="p-5 text-gray-700 bg-gray-900 rounded-lg shadow-lg font-medium capitalize">
+<div class="fixed p-4 w-full">
+  <div class="p-5 text-gray-500 bg-gray-900 rounded-lg shadow-lg font-medium capitalize">
     <span class="px-3 py-1 pr-4 border-r border-gray-800"><img src="{{ asset('assets/images/SonoryLogo.png') }}" alt="LogoSonory" class="w-8 h-8 -mt-1 inline mx-auto" /></span>
-    
-	<span class="px-6 hover:text-white cursor-pointer transition-all duration-300 {% if app.request.pathinfo == path('home') %}text-gray-300{% endif %}"><i class="fas fa-home p-2 bg-gray-800 rounded-full"></i></span>
-	
-	<span class="px-3 py-1 cursor-pointer hover:text-gray-300 text-base rounded mb-5 transition-all duration-300 {% if app.request.uri == path('songs_route') %}text-gray-300{% endif %}">
+
+    <a href="{{ path('home') }}" class="px-6 hover:text-gray-300 cursor-pointer transition-all duration-300 {% if app.request.pathinfo == path('home') %}text-gray-300{% endif %}"><i class="fas fa-home p-2 bg-gray-800 rounded-full"></i></a>
+
+    <a href="{{ path('songs') }}" class="px-3 py-1 relative cursor-pointer hover:text-gray-300 text-base rounded mb-5 transition-all duration-300 {% if app.request.pathinfo == path('songs') %}text-gray-300{% endif %}">
       <i class="w-8 fas fa-music p-2 bg-gray-800 rounded-full"></i>
       <span class="mx-1">Musiques</span>
-    </span>
-    <span class="px-3 py-1 cursor-pointer hover:text-gray-300 text-base rounded mb-5 transition-all duration-300 {% if app.request.uri == path('artists_route') %}text-gray-300{% endif %}">
+	  <span class="absolute left-0 ml-8 -mt-2 text-xs bg-gray-700 font-medium px-2 shadow-lg rounded-full">{{ get_song_count() }}</span>
+    </a>
+    <a href="{{ path('artists') }}" class="px-3 py-1 relative cursor-pointer hover:text-gray-300 text-base rounded mb-5 transition-all duration-300 {% if app.request.pathinfo == path('artists') %}text-gray-300{% endif %}">
       <i class="w-8 fas fa-th p-2 bg-gray-800 rounded-full"></i>
       <span class="mx-1">Artistes</span>
-    </span>
-    <span class="px-3 py-1 cursor-pointer hover:text-gray-300 text-base rounded mb-5 transition-all duration-300 {% if app.request.uri == path('albums_route') %}text-gray-300{% endif %}">
-      <i class="w-8 fas fa-briefcase p-2 bg-gray-800 rounded-full"></i>
+	  <span class="absolute left-0 ml-8 -mt-2 text-xs bg-gray-700 font-medium px-2 shadow-lg rounded-full">{{ get_artist_count() }}</span>
+    </a>
+    <a href="{{ path('albums') }}" class="px-3 py-1 relative cursor-pointer hover:text-gray-300 text-base rounded mb-5 transition-all duration-300 {% if app.request.pathinfo == path('albums') %}text-gray-300{% endif %}">
+      <i class="w-8 relative fas fa-briefcase p-2 bg-gray-800 rounded-full"></i>
       <span class="mx-1">Albums</span>
-    </span>
+	  <span class="absolute left-0 ml-8 -mt-2 text-xs bg-gray-700 font-medium px-2 shadow-lg rounded-full">{{ get_album_count() }}</span>
+    </a>
 
     <span class="px-1 hover:text-white cursor-pointer transition-all duration-300"><i class="fas fa-search p-2 bg-gray-800 rounded-full"></i></span>
 

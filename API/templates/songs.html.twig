@@ -1,0 +1,20 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Songs - Sonory{% endblock %}
+
+{% block body %}
+<div class="container mx-auto py-6">
+    <h1 class="text-3xl font-bold text-white mb-6">Songs</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {% for song in songs %}
+            <div class="bg-gray-800 p-5 rounded-lg shadow-lg text-white">
+                <h2 class="text-2xl font-semibold mb-2">{{ song.title }}</h2>
+                <p class="text-gray-400">{{ song.album.artist.name }}</p>
+                <a href="{{ path('song_detail', {'id': song.id}) }}" class="text-blue-500 hover:text-blue-300 mt-3 inline-block">See Details</a>
+            </div>
+        {% else %}
+            <p class="text-gray-400">No songs available.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

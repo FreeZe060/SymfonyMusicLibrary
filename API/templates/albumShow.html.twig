@@ -1,0 +1,24 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}{{ album.title }} - Sonory{% endblock %}
+
+{% block body %}
+<div class="container mx-auto py-6">
+    <h1 class="text-3xl font-bold text-white mb-6">{{ album.title }}</h1>
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-white">
+        <p class="mb-4">Released: {{ album.date|date('Y') }}</p>
+        <h2 class="text-xl font-semibold">Songs in this Album</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+            {% for song in album.songs %}
+                <div class="bg-gray-700 p-5 rounded-lg">
+                    <h3 class="text-2xl text-white">{{ song.title }}</h3>
+                    <p class="text-gray-400">{{ song.length|date('i:s') }}</p>
+                    <a href="{{ path('song_detail', {'id': song.id}) }}" class="text-blue-500 hover:text-blue-300 mt-3 inline-block">Listen</a>
+                </div>
+            {% else %}
+                <p class="text-gray-400">No songs available for this album.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

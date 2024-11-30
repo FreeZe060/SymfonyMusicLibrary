@@ -18,12 +18,15 @@ class Song
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
+    #[ORM\Column(type: 'string', length: 124)]
+    private $genre;
+
     #[ORM\Column(type: 'integer')]
     private $length;
 
-    #[ORM\ManyToOne(targetEntity: Album::class)]
+    #[ORM\ManyToOne(targetEntity: Album::class, inversedBy: 'songs')]
     #[ORM\JoinColumn(nullable: false)]
-    private $album;
+    private ?Album $album = null;
 
     public function getId(): ?int
     {
@@ -60,6 +63,17 @@ class Song
     public function setAlbum(?Album $album): self
     {
         $this->album = $album;
+        return $this;
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(string $genre): self
+    {
+        $this->genre = $genre;
         return $this;
     }
 }

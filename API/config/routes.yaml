@@ -3,16 +3,3 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
-
-songs_route:
-  path: /songs
-  controller: App\Controller\SongsController::index
-
-artists_route:
-  path: /artists
-  controller: App\Controller\ArtistsController::index
-
-albums_route:
-  path: /albums
-  controller: App\Controller\AlbumsController::index
-
