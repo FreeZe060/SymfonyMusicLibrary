@@ -10,10 +10,10 @@
             <div class="bg-gray-800 p-5 rounded-lg shadow-lg text-white">
                 <h2 class="text-2xl font-semibold mb-2">{{ song.title }}</h2>
                 <p class="text-gray-400">{{ song.album.artist.name }}</p>
-                <a href="{{ path('song_detail', {'id': song.id}) }}" class="text-blue-500 hover:text-blue-300 mt-3 inline-block">See Details</a>
+                <a href="{{ path('song_detail', {'artistId': song.album.artist.id, 'albumPos': albumsPos[song.album.id],'songPos': songsPos[song.id] }) }}" class="text-blue-500 hover:text-blue-300 mt-3 inline-block">Voir Details</a>
             </div>
         {% else %}
-            <p class="text-gray-400">No songs available.</p>
+            <p class="text-gray-400">0 musiques disponible.</p>
         {% endfor %}
     </div>
 </div>

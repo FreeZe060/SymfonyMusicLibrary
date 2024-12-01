@@ -13,6 +13,16 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
+        $connection = $manager->getConnection();
+        $platform = $connection->getDatabasePlatform();
+
+        if ($platform->getName() === 'sqlite') {
+            $connection->executeQuery('DELETE FROM sqlite_sequence WHERE name="artist"');
+            $connection->executeQuery('DELETE FROM sqlite_sequence WHERE name="album"');
+            $connection->executeQuery('DELETE FROM sqlite_sequence WHERE name="song"');
+        }
+        
         $faker = Factory::create();
 
         // Generate fake artists

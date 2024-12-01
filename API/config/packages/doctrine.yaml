@@ -26,7 +26,6 @@ doctrine:
                 alias: App
         controller_resolver:
             auto_mapping: false
-
 when@test:
     doctrine:
         dbal:

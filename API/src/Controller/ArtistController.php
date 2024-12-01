@@ -19,10 +19,10 @@ class ArtistController extends AbstractController
         ]);
     }
 
-    #[Route('/artist/{id}', name: 'artist_detail')]
-    public function show(ArtistRepository $artistRepository, int $id): Response
+    #[Route('/artist/{artistId}', name: 'artist_detail')]
+    public function show(ArtistRepository $artistRepository, int $artistId): Response
     {
-        $artist = $artistRepository->find($id);
+        $artist = $artistRepository->find($artistId);
 
         if (!$artist) {
             throw $this->createNotFoundException('Artist not found');

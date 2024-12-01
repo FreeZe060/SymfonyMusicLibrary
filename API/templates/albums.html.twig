@@ -10,7 +10,7 @@
             <div class="bg-gray-800 p-5 rounded-lg shadow-lg text-white">
                 <h2 class="text-2xl font-semibold mb-2">{{ album.title }}</h2>
                 <p class="text-gray-400">{{ album.date|date('Y') }}</p>
-                <a href="{{ path('album_detail', {'id': album.id}) }}" class="text-blue-500 hover:text-blue-300 mt-3 inline-block">See Details</a>
+                <a href="{{ path('album_detail', {'artistId': album.artist.id, 'albumPos': albumsPos[album.id]}) }}" class="text-blue-500 hover:text-blue-300 mt-3 inline-block">See Details</a>
             </div>
         {% else %}
             <p class="text-gray-400">No albums available.</p>

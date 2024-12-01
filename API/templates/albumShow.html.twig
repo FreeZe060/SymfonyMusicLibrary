@@ -13,7 +13,7 @@
                 <div class="bg-gray-700 p-5 rounded-lg">
                     <h3 class="text-2xl text-white">{{ song.title }}</h3>
                     <p class="text-gray-400">{{ song.length|date('i:s') }}</p>
-                    <a href="{{ path('song_detail', {'id': song.id}) }}" class="text-blue-500 hover:text-blue-300 mt-3 inline-block">Listen</a>
+                    <a href="{{ path('song_detail', {'artistId': song.album.artist.id, 'albumPos': albumPos,'songPos': loop.index }) }}" class="text-blue-500 hover:text-blue-300 mt-3 inline-block">Listen</a>
                 </div>
             {% else %}
                 <p class="text-gray-400">No songs available for this album.</p>
