@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
-#[ApiResource]
+#[ApiResource()]
 class Album
 {
     #[ORM\Id]

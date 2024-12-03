@@ -1,0 +1,22 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Login - Sonory{% endblock %}
+
+{% block body %}
+<div class="container mx-auto py-6">
+    <h1 class="text-3xl font-bold text-white mb-6">Se Connecter</h1>
+    <form method="get" action="{{ path('api_login') }}" class="mb-6">
+        <div class="flex items-center flex-col">
+            <input type="text" name="email" placeholder="Email..." value="{{ criteria['title']}}" 
+            class="w-full p-2 rounded-l-lg border border-gray-700 bg-gray-900 text-white"/>
+            <select name="genre" class="p-2 rounded-r-lg border border-gray-700 bg-gray-900 text-white">
+                <option value="">Tous les genres</option>
+                {% for genre in genres %}
+                    <option value="{{ genre }}" {% if genre == criteria['genre'] %}selected{% endif %}>{{ genre }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="ml-2 p-2 bg-blue-500 hover:bg-blue-400 text-white rounded-lg">Se Connecter</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

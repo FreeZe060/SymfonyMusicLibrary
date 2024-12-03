@@ -5,9 +5,10 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\SongRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: SongRepository::class)]
-#[ApiResource]
+#[ApiResource()]
 class Song
 {
     #[ORM\Id]
