@@ -5,11 +5,11 @@
 {% block body %}
 <div class="container mx-auto py-6">
     <h1 class="text-3xl font-bold text-white mb-6">{{ artist.name }}</h1>
-    <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-white">
+    <div class="bg-gray-700 p-6 rounded-lg shadow-lg text-white">
         <h2 class="text-xl font-semibold">Albums by {{ artist.name }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
             {% for album in artist.albums %}
-                <div class="bg-gray-700 p-5 rounded-lg">
+                <div class="bg-gray-600 p-5 rounded-lg">
                     <h3 class="text-2xl text-white">{{ album.title }}</h3>
                     <p class="text-gray-400">{{ album.date|date('Y') }}</p>
                     <a href="{{ path('album_detail', {'artistId': album.artist.id, 'albumPos': loop.index}) }}" class="text-blue-500 hover:text-blue-300 mt-3 inline-block">View Album</a>

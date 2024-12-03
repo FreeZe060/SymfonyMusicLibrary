@@ -20,13 +20,44 @@
                     <option value="{{ genre }}" {% if genre == criteria['genre'] %}selected{% endif %}>{{ genre }}</option>
                 {% endfor %}
             </select>
+
+            <!-- Slider pour la durée -->
+            <div class="ml-4">
+                <label for="min_duration" class="block text-white">Durée min</label>
+                <input 
+                    type="range" 
+                    id="min_duration" 
+                    name="min_duration" 
+                    min="0" 
+                    max="600" 
+                    step="1" 
+                    value="{{ criteria['min_duration']|default(0) }}" 
+                    class="w-full"
+                />
+                <label for="max_duration" class="block text-white">Durée max</label>
+                <input 
+                    type="range" 
+                    id="max_duration" 
+                    name="max_duration" 
+                    min="0" 
+                    max="600" 
+                    step="1" 
+                    value="{{ criteria['max_duration']|default(600) }}" 
+                    class="w-full"
+                />
+                <div class="flex justify-between text-white">
+                    <span>{{ criteria['min_duration']|default(0) }} min</span>
+                    <span>{{ criteria['max_duration']|default(600) }} min</span>
+                </div>
+            </div>
+
             <button type="submit" class="ml-2 p-2 bg-blue-500 hover:bg-blue-400 text-white rounded-lg">Rechercher</button>
         </div>
     </form>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {% for song in songs %}
-            {% if (criteria['title'] in song.title) and (criteria['genre'] == '' or criteria['genre'] == song.genre) %}
-                <div class="bg-gray-800 p-5 rounded-lg shadow-lg text-white">
+            {% if (criteria['title'] in song.title) and (criteria['genre'] == '' or criteria['genre'] == song.genre) and song.length >= criteria['min_duration'] and song.length <= criteria['max_duration'] %}
+                <div class="bg-gray-700 p-5 rounded-lg shadow-lg text-white">
                     <h2 class="text-2xl font-semibold mb-2">{{ song.title }}</h2>
                     <p class="text-gray-400">{{ song.album.artist.name }}</p>
                     <a href="{{ path('song_detail', {'artistId': song.album.artist.id, 'albumPos': albumsPos[song.album.id],'songPos': songsPos[song.id] }) }}" class="text-blue-500 hover:text-blue-300 mt-3 inline-block">Voir Details</a>

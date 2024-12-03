@@ -40,4 +40,15 @@ class SongRepository extends ServiceEntityRepository
            ->getOneOrNullResult()
        ;
    }
+
+   public function findByDurationInterval(int $minDuration, int $maxDuration)
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.length >= :minDuration')
+            ->andWhere('s.length <= :maxDuration')
+            ->setParameter('minDuration', $minDuration)
+            ->setParameter('maxDuration', $maxDuration)
+            ->getQuery()
+            ->getResult();
+    }
 }

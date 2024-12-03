@@ -5,9 +5,22 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\SongRepository;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\GetCollection;
+
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+use ApiPlatform\Metadata\Get;
 
 #[ORM\Entity(repositoryClass: SongRepository::class)]
+// #[ApiResource(
+//     normalizationContext: ['groups' => ['song:read']],
+//     denormalizationContext: ['groups' => ['song:write']],
+//     operations: [
+//         new Get(
+//             uriTemplate: '/artists/{artistId<\d+>}/albums/{albumPos<\d+>}/songs/{songPos<\d+>}',
+//             name: 'song_detailAPI',
+//         ),
+//     ]
+// )]
 #[ApiResource()]
 class Song
 {
@@ -17,16 +30,21 @@ class Song
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['song:read', 'song:write'])]
     private $title;
 
     #[ORM\Column(type: 'string', length: 124)]
+    #[Groups(['song:read', 'song:write'])]
     private $genre;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(['song:read', 'song:write'])]
     private $length;
 
     #[ORM\ManyToOne(targetEntity: Album::class, inversedBy: 'songs')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['song:read'])]
+    #[MaxDepth(1)]
     private ?Album $album = null;
 
     public function getId(): ?int

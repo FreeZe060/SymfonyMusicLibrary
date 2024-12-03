@@ -57,4 +57,27 @@ class AlbumController extends AbstractController
             'album' => $album,
         ]);
     }
+    #[Route('/api/artist/{artistId}/album/{albumPos}', name: 'album_detailAPI', methods: ['GET'])]
+    public function albumDetailAPI(int $artistId, int $albumPos, ArtistRepository $artistRepository, AlbumRepository $albumRepository): Response
+    {
+        $artist = $artistRepository->find($artistId);
+
+        if (!$artist) {
+            throw $this->createNotFoundException('Artist not found');
+        }
+
+        $albums = $albumRepository->findBy(['artist' => $artist]);
+
+        usort($albums, fn($a, $b) => $a->getId() <=> $b->getId());
+
+        if ($albumPos < 1 || $albumPos > count($albums)) {
+            throw $this->createNotFoundException('Album position out of range');
+        }
+
+        $album = $albums[$albumPos - 1];
+
+        return $this->json([
+            'album' => $album,
+        ]);
+    }
 }
