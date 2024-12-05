@@ -9,19 +9,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: SongRepository::class)]
-// #[ApiResource(
-//     normalizationContext: ['groups' => ['song:read']],
-//     denormalizationContext: ['groups' => ['song:write']],
-//     operations: [
-//         new Get(
-//             uriTemplate: '/artists/{artistId<\d+>}/albums/{albumPos<\d+>}/songs/{songPos<\d+>}',
-//             name: 'song_detailAPI',
-//         ),
-//     ]
-// )]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: ['groups' => ['song:read']],
+    denormalizationContext: ['groups' => ['song:write']]
+)]
+#[ApiFilter(RangeFilter::class, properties: ['length'])]
+#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial', 'genre' => 'exact'])]
 class Song
 {
     #[ORM\Id]

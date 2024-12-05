@@ -1,0 +1,38 @@
+Exemple de token généré: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MzM0Mzg2NjEsImV4c
+CI6MTczMzQ0MjI2MSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImVtYWlsIjoiVGltX1ZAb3V0bG9vay5mciJ9.HkaaBXC
+i4R1HyCdYfFmF8_uJpjicFGi2WtJJNXMFJpgqwzBFEU16RJQNtiRf5yI4379lCYJyVKlS515TB7DtCJ_ZDiONhCCEKh
+J4Pa9JQJfdcIfrJNY4Tycw2AbArzPLgOB7U21hblWj6XpojbthCuwNkZQfldUzzewNFyTMgZGf_mr4foKdSKymrSfIb
+WWKPJRQRUbG3RAhxDHIqiYJkEO_vOYsfwR7lhtEsvOqQw1eMoG2accGV-7nse5DR8lqFA_g5VsI4NrbsLipqnYyN7oH
+P92TeLLwB_he9HS16QW0su81ILYGJSN8ldOaa3kxaItwCfL_pXwbU47LKezJ6A
+
+Pour le bonus endpoint, elle est disponible hors du /api par exemple: http://127.0.0.1:8000/artist/1/album/2/song/5
+
+<!-- DB -->
+
+php bin/console doctrine:fixtures:load
+
+php bin/console doctrine:migrations:list
+
+php bin/console doctrine:migrations:migrate
+
+php bin/console make:migration
+
+php bin/console doctrine:database:drop --force
+
+php bin/console doctrine:database:create
+
+<!-- symfony -->
+
+symfony server:start
+
+php bin/console doctrine:database:validate
+
+php bin/console doctrine:database:create
+
+composer install
+
+php -m
+
+<!-- encore / tailwind -->
+
+npm run watch

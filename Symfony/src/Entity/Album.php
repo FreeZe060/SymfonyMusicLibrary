@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
+#[ApiResource()]
 class Album
 {
     #[ORM\Id]
